@@ -1,0 +1,72 @@
+<View style={{
+      flex:1,
+      backgroundColor:Color.icon
+    }}>
+      <StatusBar backgroundColor={Color.icon} />
+      <View style={{flex:1}}>
+        {/* header */}
+
+        <View style={styles.containerHeader}>
+          <View style={{justifyContent: 'center',alignItems: 'center',}}>
+            <Text style={{fontSize: 30}}>Sales</Text>
+          </View>
+          <View style={styles.garisheader} />
+        </View>
+        {/* body */}
+        <View style={{ flex: 1, paddingTop: 5 /* DISINI KALO FOOTER NYA MAU DIJADIIN SATU FLEX NYA HAPUS AJA */ }}>
+          <View style={{
+            paddingHorizontal: 20,
+            paddingBottom:25
+          }}>
+            <View style={{
+              flexDirection: 'row',
+              borderWidth: 2,
+              borderRadius: 20,
+              height: 50,
+              alignItems:'center'
+            }}>
+              <TouchableOpacity
+                onPress={() => setShowSearchInput(!showSearchInput)}
+                style={{
+                  backgroundColor: Color.primary,
+                  left: 5,
+                  height: 40,
+                  width: 40,
+                  borderRadius:15,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                <MaterialIcons name='search' size={24} style={{ color: showSearchInput ? Color.icon : Color.border }} />
+              </TouchableOpacity>
+              <View style={{
+                flexDirection: 'row', paddingHorizontal:8
+              }}>
+                {showSearchInput && (
+                  <TextInput
+                    style={styles.inputSearch}
+                    value={searchSalesQuery}
+                    onChangeText={setSearchSalesQuery}
+                    onSubmitEditing={onSubmitEditing}
+                  />
+                )}
+              </View>
+            </View>
+          </View>
+          <FlatList
+            data={searchSalesQuery ? searchSalesData : salesData}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <RenderItem
+                item={item}
+                index={index}
+              />
+            )}
+          />
+        </View>
+      </View>
+      {/* footer */}
+
+      <View style={{ alignItems: 'center' }}>
+        <Text>FOOTER</Text>
+      </View>
+    </View >
